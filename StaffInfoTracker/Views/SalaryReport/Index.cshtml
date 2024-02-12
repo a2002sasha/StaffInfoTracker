@@ -1,0 +1,58 @@
+﻿@model List<StaffInfoTracker.ViewModels.SalaryReportViewModel>
+@{
+    ViewBag.Title = "Зарплатна звітність";
+}
+
+<h2>Фільтри для формування звіту</h2>
+
+<form asp-controller="salaryReport" asp-action="generateReport" class="filter-form">
+    <div>
+        <label for="filterOption">Вибір фільтру:</label>
+        <select name="filterOption" asp-items="@ViewBag.FilterOptions" class="form-control"></select>
+    </div>
+
+    <button type="submit">Сформувати звіт</button>
+</form>
+
+<form asp-controller="salaryReport" asp-action="exportToTxt" asp-route-filterOption="@ViewBag.FilterOptions.SelectedValue" class="filter-form">
+    @if (Model == null)
+    {
+        <button type="submit" disabled>Завантажити звіт</button>
+    }
+    else
+    {
+        <button type="submit">Завантажити звіт</button>
+    }
+</form>
+
+<h2>Звіт</h2>
+<div>
+    <table>
+        <thead>
+            <tr>
+                <th>Назва</th>
+                <th>Кількість працівників</th>
+                <th>Мінімальний оклад</th>
+                <th>Максимальний оклад</th>
+                <th>Середній оклад</th>
+                <th>Загальна сума окладів</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null)
+            {
+                @foreach (var salaryReport in Model)
+                {
+                    <tr>
+                        <td>@salaryReport.Name</td>
+                        <td>@salaryReport.EmployeeQty</td>
+                        <td>@salaryReport.MinSalary.ToString("0.00")</td>
+                        <td>@salaryReport.MaxSalary.ToString("0.00")</td>
+                        <td>@salaryReport.AvgSalary.ToString("0.00")</td>
+                        <td>@salaryReport.TotalSalarySum.ToString("0.00")</td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>

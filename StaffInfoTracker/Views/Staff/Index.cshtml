@@ -1,0 +1,60 @@
+﻿@model StaffInfoTracker.ViewModels.StaffInfoViewModel
+@{
+	ViewBag.Title = "Дані про працівників";
+}
+
+<h2>Фільтри для пошуку</h2>
+
+<form asp-controller="staff" asp-action="filterEmployees" class="filter-form">
+	<div>
+		<label for="position">Посада</label>
+		<select name="position" asp-items="@Model.SelectList!.Positions" class="form-control"></select>
+	</div>
+
+	<div>
+		<label for="department">Відділ</label>
+		<select name="department" asp-items="@Model.SelectList!.Departments" class="form-control"></select>
+	</div>
+
+	<div>
+		<label for="fullName">ПІБ</label>
+		<input type="text" name="fullName" value="@Model.QueryString!.FullName" />
+	</div>
+	<button class="btn" type="submit">Пошук</button>
+</form>
+
+<h2>Список працівників</h2>
+
+<div>
+	<table>
+		<thead>
+			<tr>
+				<th>ПІБ</th>
+				<th>Відділ</th>
+				<th>Посада</th>
+				<th>Адреса</th>
+				<th>Телефон</th>
+				<th>Дата народження</th>
+				<th>Дата взяття на роботу</th>
+				<th>Оклад</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var employee in Model.Employees)
+			{
+				<tr>
+					<td>@employee.LastName @employee.FirstName @employee.MiddleName</td>
+					<td>@employee.Department!.DepartmentName</td>
+					<td>@employee.Position!.PositionName</td>
+					<td>@employee.Address.Country, м. @employee.Address.City, вул. @employee.Address.Street, буд. @employee.Address.HouseNumber, кв. @employee.Address.ApartmentNumber</td>
+					<td>@employee.PhoneNumber</td>
+					<td>@employee.BirthDate.ToString("d")</td>
+					<td>@employee.HireDate.ToString("d")</td>
+					<td>@employee.Salary.ToString("0.00")</td>
+					<td><a asp-controller="staff" asp-action="editEmployee" asp-route-id="@employee.EmployeeId" asp-route-position="@Model.QueryString?.Position" asp-route-department="@Model.QueryString?.Department" asp-route-fullName="@Model.QueryString?.FullName">Редагувати</a></td>
+				</tr>
+			}
+		</tbody>
+	</table>
+</div>

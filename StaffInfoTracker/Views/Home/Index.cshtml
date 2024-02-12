@@ -1,0 +1,14 @@
+﻿@model StaffInfoTracker.ViewModels.CompanyDetailsViewModel
+@{
+    ViewBag.Title = "Головна сторінка";
+}
+
+<div class="company-info">
+    <h3>Інформація про компанію</h3>
+    <div>
+        <p>Назва: @Model.CompanyName</p>
+    </div>
+    <div>
+        <p>Адреса: @Model.Address.Country, м. @Model.Address.City, вул. @Model.Address.Street, буд. @Model.Address.HouseNumber, кв. @Model.Address.ApartmentNumber</p>
+    </div>
+</div>

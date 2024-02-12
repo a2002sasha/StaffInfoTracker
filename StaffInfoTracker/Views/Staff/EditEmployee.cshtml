@@ -1,0 +1,92 @@
+﻿@model StaffInfoTracker.ViewModels.EmployeeViewModel
+@{
+    ViewBag.Title = "Картка працівника";
+}
+
+<h3>Редагування даних працівника</h3>
+<hr />
+<form asp-controller="staff" asp-action="editEmployee" asp-route-position="@Model.QueryString?.Position" asp-route-department="@Model.QueryString?.Department" asp-route-fullName="@Model.QueryString?.FullName" class="edit-form">
+    <input type="hidden" asp-for="EmployeeId" />
+    <input type="hidden" asp-for="Address.AddressId" />
+    <div class="form-group">
+        <label asp-for="LastName"></label>
+        <input asp-for="LastName" />
+        <span asp-validation-for="LastName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="FirstName"></label>
+        <input asp-for="FirstName" />
+        <span asp-validation-for="FirstName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="MiddleName"></label>
+        <input asp-for="MiddleName" />
+        <span asp-validation-for="MiddleName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="SelectedDepartmentId"></label>
+        <select asp-for="SelectedDepartmentId" asp-items="@Model.SelectList!.Departments" class="form-control"></select>
+        <span asp-validation-for="SelectedDepartmentId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="SelectedPositionId"></label>
+        <select asp-for="SelectedPositionId" asp-items="@Model.SelectList!.Positions" class="form-control"></select>
+        <span asp-validation-for="SelectedPositionId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Address.Country"></label>
+        <input asp-for="Address.Country" />
+        <span asp-validation-for="Address.Country" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Address.City"></label>
+        <input asp-for="Address.City" />
+        <span asp-validation-for="Address.City" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Address.Street"></label>
+        <input asp-for="Address.Street" />
+        <span asp-validation-for="Address.Street" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Address.HouseNumber"></label>
+        <input asp-for="Address.HouseNumber" />
+        <span asp-validation-for="Address.HouseNumber" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Address.ApartmentNumber"></label>
+        <input asp-for="Address.ApartmentNumber" />
+        <span asp-validation-for="Address.ApartmentNumber" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Address.PostIndex"></label>
+        <input asp-for="Address.PostIndex" />
+        <span asp-validation-for="Address.PostIndex" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="PhoneNumber"></label>
+        <input asp-for="PhoneNumber" />
+        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="BirthDate"></label>
+        <input asp-for="BirthDate" />
+        <span asp-validation-for="BirthDate" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="HireDate"></label>
+        <input asp-for="HireDate" />
+        <span asp-validation-for="HireDate" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Salary"></label>
+        <input asp-for="Salary" />
+        <span asp-validation-for="Salary" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <button class="btn" type="submit">Зберегти</button>
+    </div>
+    <div class="form-group">
+        <a asp-controller="staff" asp-action="index" asp-route-position="@Model.QueryString?.Position" asp-route-department="@Model.QueryString?.Department" asp-route-fullName="@Model.QueryString?.FullName" class="btn">Назад</a>
+    </div>
+</form>
